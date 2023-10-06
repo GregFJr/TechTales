@@ -16,7 +16,7 @@ Post.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: User,
+      model: user,
       key: "id",
     },
   },
@@ -27,3 +27,5 @@ Post.init({
   underscored: true,
   modelName: "post",
 });
+
+module.exports = Post;

@@ -12,7 +12,7 @@ Comment.intit({
     type: DataTypes.INTEGER,
     allownull: fales,
     references: {
-      model: Post,
+      model: post,
       key: "id",
     },
   },
@@ -20,7 +20,7 @@ Comment.intit({
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: User,
+      model: user,
       key: "id",
     },
   },
@@ -30,3 +30,5 @@ Comment.intit({
   underscored: true,
   modelName: "comment",
 });
+
+module.exports = Comment;
