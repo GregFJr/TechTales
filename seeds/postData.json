@@ -1,0 +1,17 @@
+[
+    {
+        "title": "React: The Frontend Revolution",
+        "content": "React has transformed the way we think about frontend development with its component-based architecture and virtual DOM. The integration of React with various backend technologies has given rise to popular stacks like MERN and MEAN.",
+        "userId": 1
+    },
+    {
+        "title": "MERN vs MEAN: A Comparative Analysis",
+        "content": "Both MERN and MEAN offer robust solutions for full-stack development. While MEAN leverages Angular for frontend, MERN utilizes React. The choice between them often boils down to individual project requirements and developer preference.",
+        "userId": 1
+    },
+    {
+        "title": "Beyond MERN: Exploring New Frontend Horizons",
+        "content": "While React remains a dominant choice for many developers, the world of frontend development is vast. Technologies like Vue and Svelte are gaining traction and offer unique approaches that challenge traditional paradigms.",
+        "userId": 1
+    }
+]

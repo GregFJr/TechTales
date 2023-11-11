@@ -1,0 +1,31 @@
+const { User } = require("../models");
+
+exports.loginPage = async (req, res) => {
+  try {
+    const userData = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+
+    if (!userData) {
+      res.status(400).json({ message: "User not found" });
+      return;
+    }
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (validPassword) {
+      req.session.save(() => {
+        req.session.user_id = userData.id;
+        req.session.loggedIn = true;
+
+        res.redirect("/");
+      });
+    } else {
+      res.status(400).json(userData);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};

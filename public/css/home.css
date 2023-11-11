@@ -1,0 +1,120 @@
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; 
+}
+
+.main-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.post-title {
+    background-color: rgb(154, 119, 187);
+    border-radius: 5px;
+    margin: 0;
+}
+
+.post-title h2 {
+    margin: 0;
+}
+
+.post-content {
+    background-color: rgb(219, 218, 220);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0;
+}
+
+.post h2{
+    background-color: rgb(154, 119, 187);
+    border-radius: 5px;
+    margin-top: 0;
+    padding-left: 10px;
+    
+}
+.post {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.548);
+    width: 95%;
+}
+
+.post p {
+    padding-left: 10px; 
+    font-size: 22px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(154, 119, 187);
+    padding: 10px;
+    background-color: #494d5f;
+    height: 3%;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    margin: 0 10px;
+
+}
+
+.post a {
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.delete-post {
+    color: red;
+    padding: 0 5px;
+}
+
+.edit-post {
+    padding: 0 5px;
+}
+
+.logo {
+    font-family: 'Electrolize', sans-serif;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.dash-header {
+    font-family: 'Electrolize', sans-serif;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.add-post {
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(154,  119, 187);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px 5px; 
+}
+
+.forms {
+    display: flex;
+    justify-content: center;
+    margin-top: 25%;
+}
+
+.container h3 {
+    margin-left: 45%;
+}

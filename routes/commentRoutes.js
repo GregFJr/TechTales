@@ -1,5 +1,8 @@
 const router = require('express').Router();
+const commentController =  require('../controllers/commentController');
 
-// Define routes here...
+router.post('/', commentController.commentPage);
+
+router.post('/addComment', commentController.addComment);
 
 module.exports = router;

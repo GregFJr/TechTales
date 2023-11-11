@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const routes = require('./routes');
 const helpers = require('./utils/helpers');
 
+
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -17,7 +18,7 @@ const hbs = exphbs.create({ helpers });
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 300000,
+    maxAge: 3600000,
     httpOnly: true,
     secure: false,
     sameSite: 'strict',
@@ -38,6 +39,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
 
 app.use(routes);
 
