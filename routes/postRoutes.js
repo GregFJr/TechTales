@@ -4,13 +4,9 @@ const postController = require('../controllers/postController');
 
 router.get('/post-id/:id', postController.getPostById);  
 
-router.get('/add-post', postController.getAddPostForm);
+router.post('/create-post', withAuth, postController.createPost);
 
-router.post('/create-post', postController.createPost);
-
-router.post('/', withAuth, postController.createPost);
-
-router.put('/:id', withAuth, postController.updatePost);
+router.put('/update/:id', withAuth, postController.updatePost);
 
 router.delete('/delete/:id', withAuth, postController.deletePost);
 

@@ -2,13 +2,13 @@ const router = require('express').Router();
 const withAuth = require('../utils/auth');
 const dashBoardController = require('../controllers/dashboardController');
 
-// router.get('/', dashBoardController.getDashboard);
 
 router.get('/', withAuth, dashBoardController.renderDashboard);
 
-router.get('/add-post', withAuth, dashBoardController.renderAddPost);
+router.get('/add-form', withAuth, dashBoardController.renderAddForm);
 
-router.post('/add-post', dashBoardController.createPost);
+router.get('/update-form/:id', withAuth, dashBoardController.renderUpdateForm);
+
 
 
 

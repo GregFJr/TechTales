@@ -24,23 +24,36 @@ exports.renderDashboard = async (req, res) => {
     }
 };
 
-exports.renderAddPost = (req, res) => {
+exports.renderAddForm = (req, res) => {
     res.render('add-post', {
         loggedIn: req.session.loggedIn
     });
 };
 
-exports.createPost = async (req, res) => {
+exports.renderUpdateForm = async (req, res) => {
     try {
-        const newPost = await Post.create({
-            title: req.body.title,
-            content: req.body.content,
-            userId: req.session.user_id
-        });
         
-        res.redirect('/dashboard');
-    } catch (err) {
-        console.error(err);
-        res.status(500).json(err);
+        const postData = await Post.findOne({
+            where: {
+                id: req.params.id, 
+                userId: req.session.user_id, 
+            },
+        });
+
+        if (!postData) {
+        
+            res.status(404).send('Post not found');
+            return;
+        }
+
+        res.render('update-post', {
+            loggedIn: req.session.logged_in,
+            post: postData.get({ plain: true }) 
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Error retrieving the post');
     }
 };
+
+

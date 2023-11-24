@@ -4,8 +4,8 @@ exports.signupPage = async (req, res) => {
     try {
       const userData = await User.create({
         username: req.body.username,
-        password: req.body.password,
         email: req.body.email,
+        password: req.body.password,
       });
 
       req.session.save(() => {

@@ -18,7 +18,7 @@ exports.loginPage = async (req, res) => {
     if (validPassword) {
       req.session.save(() => {
         req.session.user_id = userData.id;
-        req.session.loggedIn = true;
+        req.session.logged_in = true;
 
         res.redirect("/");
       });

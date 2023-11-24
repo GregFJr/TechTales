@@ -1,6 +1,7 @@
 const { Post, User, Comment } = require("../models");
 
 exports.getPosts = async (req, res) => {
+  console.log("GET POST");
   try {
     postData = await Post.findAll({
       include: [
@@ -53,83 +54,73 @@ exports.getPostById = async (req, res) => {
   }
 };
 
-exports.getAddPostForm = (req, res) => {
-    try {
-        res.render('add-post', { loggedIn: req.session.loggedIn });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json(err);
-    }
-};
-
 exports.createPost = async (req, res) => {
-    try {
-        const newPost = await Post.create({
-            title: req.body.title,
-            content: req.body.content,
-            userId: req.session.userId  
-        });
+  try {
+    const newPost = await Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      userId: req.session.user_id,
+    });
 
-        res.redirect('/dashboard');
-    } catch (err) {
-        console.error(err);
-        res.status(500).json(err);
-    }
-};
-
-exports.createPost = async (req, res) => {
-    try {
-        const newPost = await Post.create({
-            ...req.body,
-            userId: req.session.userId
-        });
-
-        res.status(200).json(newPost);
-    } catch (err) {
-        console.log(err);
-        res.status(400).json(err);
-    }
+    res.redirect("/dashboard");
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
 };
 
 exports.updatePost = async (req, res) => {
-    try {
-        const post = await Post.update(req.body, {
-            where: {
-                id: req.params.id,
-                userId: req.session.userId
-            }
+  if (!req.session.logged_in) {
+    return res
+      .status(403)
+      .json({ message: "You must be logged in to perform this action" });
+  }
+
+  const { title, content } = req.body;
+  const postData = { title, content };
+
+  try {
+    const [updatedRowCount] = await Post.update(postData, {
+      where: {
+        id: req.params.id,
+        userId: req.session.user_id,
+      },
+    });
+
+    if (updatedRowCount === 0) {
+      return res
+        .status(404)
+        .json({
+          message:
+            "No post found with this id, or you do not have permission to update it.",
         });
-
-        if (!post) {
-            res.status(404).json({ message: 'No post found with this id!' });
-            return;
-        }
-
-        res.status(200).json(post);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
     }
+
+    res.redirect("/dashboard");
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error updating post. Please try again later." });
+  }
 };
 
 exports.deletePost = async (req, res) => {
-    try {
-        const post = await Post.destroy({
-            where: {
-                id: req.params.id,
-                userId: req.session.user_id
-            }
-        });
+  try {
+    const post = await Post.destroy({
+      where: {
+        id: req.params.id,
+        userId: req.session.user_id,
+      },
+    });
 
-        if (!post) {
-            res.status(404).json({ message: 'No post found with this id!' });
-            return;
-        }
-
-        res.status(200).json(post);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+    if (!post) {
+      res.status(404).json({ message: "No post found with this id!" });
+      return;
     }
-};
 
+    res.status(200).json(post);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
